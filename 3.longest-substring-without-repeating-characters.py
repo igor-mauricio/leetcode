@@ -59,18 +59,14 @@ class Solution:
         hashmap = {}
         max_len = 0
         current_len = 0
-        i = 0
-        while i < len(s):
+        for i in range(len(s)):
             current_char = s[i]
             if current_char in hashmap:
-                i = hashmap[current_char] + 1
-                hashmap = {}
                 max_len = current_len if current_len > max_len else max_len
-                current_char = s[i]
-                current_len = 0
+                hashmap = {key: value for key, value in hashmap.items() if value >= hashmap[current_char]}
+                current_len =  i - hashmap[current_char] -1
             hashmap[current_char] = i
             current_len += 1
-            i += 1
         max_len = current_len if current_len > max_len else max_len
         return max_len
             
