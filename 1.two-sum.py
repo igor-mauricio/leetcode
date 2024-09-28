@@ -15,6 +15,8 @@ class Solution:
             if target - num in num_map:
                 return [num_map[target - num], i]
             num_map[num] = i
+
+# O(n)
         
 # @lc code=end
 

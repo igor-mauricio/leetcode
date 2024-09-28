@@ -56,7 +56,6 @@ from typing import List
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         total_len = len(nums1) + len(nums2)
-        odd = total_len % 2
         n1_index = 0
         n2_index = 0
         final_array = []
@@ -69,11 +68,13 @@ class Solution:
                 final_array.append(nums2[n2_index])
                 n2_index += 1
 
-        if odd:
+        if total_len % 2:
             return final_array[(total_len + 1)//2 -1]
         else:
             return (final_array[(total_len)//2 - 1] + final_array[(total_len)//2])/2
             
+# O(m+n)
+
 Solution().findMedianSortedArrays([], [1])
             
             

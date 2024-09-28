@@ -35,6 +35,8 @@ class Solution:
                 l2 = l2.next
             current_result = current_result.next
         return result
+    
+# O(m + n)
 
 if __name__ == "__main__":
     result = Solution().addTwoNumbers(ListNode(9, ListNode(9, ListNode(9, ListNode(9,ListNode(9,ListNode(9,ListNode(9))))))), ListNode(9, ListNode(9, ListNode(9,ListNode(9)))))

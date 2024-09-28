@@ -71,7 +71,7 @@ class Solution:
         max_len = current_len if current_len > max_len else max_len
         return max_len
             
-            
+# O(n)
 Solution().lengthOfLongestSubstring("dvdf")
             
         
