@@ -43,31 +43,30 @@
 
 # @lc code=start
 class Solution:
-    
     def longestPalindrome(self, s: str) -> str:
         largest = ""
+
+        if len(s) <=1:
+            return s
+
+        def expand_from_center(left, right):
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return s[left + 1:right]
     
-        for i in range(len(s)):
-            for j in range(i + len(largest), len(s)):
-                s_slice = s[i:j+1]
-                if self.isPalindrome(s_slice) and len(s_slice) > len(largest):
-                    largest = s_slice
+        for i in range(len(s) - 1):
+            odd = expand_from_center(i, i)
+            even = expand_from_center(i, i + 1)
+
+            if len(odd) > len(largest):
+                largest = odd
+            if len(even) > len(largest):
+                largest = even
 
         return largest
-
-    def isPalindrome(self, text: str) -> bool:
-        for i in range(len(text)//2):
-            if text[i] != text[len(text)-1 -i]:
-                return False
-        return True
-
-
-
-
-
-        
-
-
+    
         
 # @lc code=end
 
+Solution().longestPalindrome("xaabacxcabaaxcabaax")
