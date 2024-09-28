@@ -15,25 +15,20 @@ from typing import Optional
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        result = ListNode((l1.val + l2.val) % 10)
+        value = (l1.val + l2.val) % 10
+        result = ListNode(value % 10)
+        carry = value // 10
         current_result = result
-        remainder = int((l1.val + l2.val - (l1.val + l2.val) % 10)/10)
         l1 = l1.next
         l2 = l2.next
         while True:
             if l1 is None and l2 is None:
-                if remainder > 0:
-                    current_result.next = ListNode(remainder)
+                if carry > 0:
+                    current_result.next = ListNode(carry)
                 break
-            if l1 is None:
-                current_result.next = ListNode((l2.val + remainder)% 10)
-                remainder = int((l2.val + remainder - (l2.val + remainder) % 10)/10)
-            elif l2 is None:
-                current_result.next = ListNode((l1.val + remainder)% 10)
-                remainder = int((l1.val + remainder - (l1.val + remainder) % 10)/10)
-            else:
-                current_result.next = ListNode((l1.val + l2.val + remainder) % 10)
-                remainder = int((l1.val + l2.val + remainder - (l1.val + l2.val + remainder) % 10)/10)
+            value = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
+            carry = value // 10
+            current_result.next = ListNode(value % 10)
             if l1 is not None:
                 l1 = l1.next
             if l2 is not None:
