@@ -44,29 +44,50 @@
 # @lc code=start
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        largest = ""
 
         if len(s) <=1:
             return s
 
         def expand_from_center(left, right):
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                left -= 1
-                right += 1
-            return s[left + 1:right]
-    
-        for i in range(len(s) - 1):
-            odd = expand_from_center(i, i)
-            even = expand_from_center(i, i + 1)
+            current_max = s[0]
+            while True:
+                while left >= 0 and right < len(s) and s[left] == s[right]:
+                    left -= 1
+                    right += 1
 
-            if len(odd) > len(largest):
-                largest = odd
-            if len(even) > len(largest):
-                largest = even
+                current_max = s[left + 1: right]
+                
+                trial_left = left
+                trial_right = right
+                while trial_right < len(s) :
+                    trial_left += 1
+                    trial_right += 1
 
-        return largest
+                    if trial_right == right:
+                        continue
+                    trial_right < len(s) 
+                    if trial_right >= len(s) or s[trial_left] == s[trial_right] and s[trial_left:trial_right+1] == s[trial_left:trial_right+1][::-1]:
+                        break
+
+
+                if trial_left >= 0 and trial_right < len(s) and s[trial_left] == s[trial_right]:
+                    left = trial_left
+                    right = trial_right
+                    current_max = s[left: right +1]
+                else:
+                    break
+            return current_max
     
+        odd = expand_from_center(0, 0)
+        even = expand_from_center(0, 1)
+
+        if len(odd) > len(even):
+            return odd
+        else:
+            return even
+
+# O(n)
         
 # @lc code=end
 
-Solution().longestPalindrome("xaabacxcabaaxcabaax")
+Solution().longestPalindrome("aacabdkacaa")
